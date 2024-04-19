@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import { getPokemons, getPokemonByName } from "@/api";
 import { PokemonGrid } from "@/components";
-import { PokemonShort } from "@/types";
+import { Pokemon } from "@/types";
 
 export default function Home() {
-    const [pokemonsWithImages, setPokemonsWithImages] = useState<PokemonShort[]>([]);
+    const [pokemonsWithImages, setPokemonsWithImages] = useState<Pokemon[]>([]);
 
     useEffect(() => {
         const fetchPokemonsWithImages = async () => {
@@ -18,13 +18,17 @@ export default function Home() {
         fetchPokemonsWithImages();
     }, []);
 
-    const enhancePokemonsWithImages = async (pokemons: PokemonShort[]) => {
-        const pokemonDetailsPromises = pokemons.map(async (pokemon: PokemonShort) => {
+    const enhancePokemonsWithImages = async (pokemons: Pokemon[]) => {
+        const pokemonDetailsPromises = pokemons.map(async (pokemon: Pokemon) => {
             const pokemonDetails = await getPokemonByName(pokemon.name);
             return {
                 id: pokemonDetails.id,
                 name: pokemonDetails.name,
-                image: pokemonDetails.sprites.front_default
+                image: pokemonDetails.sprites && pokemonDetails.sprites.front_default,
+                types: pokemonDetails.types,
+                stats: pokemonDetails.stats,
+                abilities: pokemonDetails.abilities,
+                sprites: pokemonDetails.sprites
             };
         });
 
