@@ -1,4 +1,5 @@
 import PokemonCard from "./PokemonCard";
 import SearchInput from "./SearchInput";
+import PokemonGrid from "./PokemonGrid";
 
-export { PokemonCard, SearchInput };
+export { PokemonCard, SearchInput, PokemonGrid };
