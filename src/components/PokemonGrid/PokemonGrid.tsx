@@ -1,19 +1,19 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { PokemonCard, SearchInput } from "@/components";
 import { Pokemon } from "@/types";
 
-interface GridProps {
+interface PokemonGridProps {
     pokemons: Pokemon[];
 }
 
-const PokemonGrid: React.FC<GridProps> = ({ pokemons }: GridProps): JSX.Element => {
+const PokemonGrid: React.FC<PokemonGridProps> = ({ pokemons }): JSX.Element => {
     const [query, setQuery] = useState<string>("");
 
-    const filteredPokemons = pokemons.filter((pokemon: Pokemon) => {
-        pokemon.name.toLowerCase().includes(query.toLowerCase());
-    });
+    const filteredPokemons = pokemons.filter((pokemon: Pokemon) =>
+        pokemon.name.toLowerCase().includes(query.toLowerCase())
+    );
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 p-4">
