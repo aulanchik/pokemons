@@ -1,15 +1,37 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Header } from "@/components";
 import * as LabelPrimitives from "@radix-ui/react-label";
 import { capitalize, formatEntry, removeHyphens } from "@/utils";
 import { getPokemonByName } from "@/api";
+import { Pokemon } from "@/types";
 
-export default async function Page({ params }: { params: { name: string } }) {
+export default function Page({ params }: { params: { name: string } }) {
+    const [pokemon, setPokemon] = useState<Pokemon>();
     const { name } = params;
-    const pokemon = await getPokemonByName(name);
+
+    useEffect(() => {
+        async function fetchPokemon() {
+            try {
+                const fetchedPokemon = await getPokemonByName(name);
+                setPokemon(fetchedPokemon);
+            } catch (error) {
+                console.error("Error fetching Pokemon:", error);
+            }
+        }
+
+        fetchPokemon();
+
+        return () => {
+            setPokemon(undefined);
+        };
+    }, [name]);
+
+    if (!pokemon) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="flex flex-col items-center content-start h-screen">
@@ -21,7 +43,7 @@ export default async function Page({ params }: { params: { name: string } }) {
                     </div>
                     <h1 className="text-black dark:text-white font-bold text-2xl">{capitalize(pokemon.name)}</h1>
                     <div className="mt-4 grid grid-cols-2 gap-4 m-8">
-                        {pokemon.stats.map((statObject: { base_stat: number; stat: { name: string } }) => {
+                        {pokemon.stats.map((statObject) => {
                             const statName = formatEntry(statObject.stat.name);
                             const statValue = statObject.base_stat;
 
