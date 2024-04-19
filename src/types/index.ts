@@ -2,26 +2,32 @@ interface Pokemon {
     id: string;
     name: string;
     image: string;
-    types: {
+    types?: {
         slot: number;
         type: {
             name: string;
         };
     }[];
-    stats: {
+    stats?: {
         base_stat: number;
         stat: {
             name: string;
         };
     }[];
-    abilities: {
+    abilities?: {
         ability: {
             name: string;
         };
     }[];
-    sprites: {
+    sprites?: {
         front_default: string;
     };
 }
 
-export type { Pokemon };
+interface PokemonShort {
+    id: string;
+    name: string;
+    image: string;
+}
+
+export type { Pokemon, PokemonShort };

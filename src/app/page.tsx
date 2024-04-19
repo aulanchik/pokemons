@@ -3,10 +3,10 @@
 import { useState, useEffect } from "react";
 import { getPokemons, getPokemonByName } from "@/api";
 import { PokemonGrid } from "@/components";
-import { Pokemon } from "@/types";
+import { PokemonShort } from "@/types";
 
 export default function Home() {
-    const [pokemonsWithImages, setPokemonsWithImages] = useState<Pokemon[]>([]);
+    const [pokemonsWithImages, setPokemonsWithImages] = useState<PokemonShort[]>([]);
 
     useEffect(() => {
         const fetchPokemonsWithImages = async () => {
@@ -18,16 +18,17 @@ export default function Home() {
         fetchPokemonsWithImages();
     }, []);
 
-    const enhancePokemonsWithImages = async (pokemons: Pokemon[]) => {
-        const pokemonDetailsPromises = pokemons.map((pokemon: Pokemon) => getPokemonByName(pokemon.name));
+    const enhancePokemonsWithImages = async (pokemons: PokemonShort[]) => {
+        const pokemonDetailsPromises = pokemons.map(async (pokemon: PokemonShort) => {
+            const pokemonDetails = await getPokemonByName(pokemon.name);
+            return {
+                id: pokemonDetails.id,
+                name: pokemonDetails.name,
+                image: pokemonDetails.sprites.front_default
+            };
+        });
 
-        const pokemonDetails = await Promise.all(pokemonDetailsPromises);
-
-        const pokemonsWithImages = pokemonDetails.map((pokemon) => ({
-            id: pokemon.id,
-            name: pokemon.name,
-            image: pokemon.sprites.front_default
-        }));
+        const pokemonsWithImages = await Promise.all(pokemonDetailsPromises);
 
         return pokemonsWithImages;
     };
