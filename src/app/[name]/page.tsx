@@ -5,8 +5,8 @@ import Image from "next/image";
 import { Header } from "@/components";
 import * as LabelPrimitives from "@radix-ui/react-label";
 import { capitalize, formatEntry, removeHyphens } from "@/utils";
+import { Pokemon, PokemonStat, PokemonType, PokemonAbility } from "@/types";
 import { getPokemonByName } from "@/api";
-import { Pokemon } from "@/types";
 
 export default function Page({ params }: { params: { name: string } }) {
     const [pokemon, setPokemon] = useState<Pokemon>();
@@ -39,11 +39,16 @@ export default function Page({ params }: { params: { name: string } }) {
                 <Header />
                 <div className=" flex flex-col items-center m-8">
                     <div className="flex flex-cols pt-8">
-                        <Image src={pokemon.sprites.front_default} alt={pokemon.name} height={300} width={300} />
+                        <Image
+                            src={pokemon.sprites?.other.dream_world.front_default}
+                            alt={pokemon.name}
+                            height={300}
+                            width={300}
+                        />
                     </div>
                     <h1 className="text-black dark:text-white font-bold text-2xl">{capitalize(pokemon.name)}</h1>
                     <div className="mt-4 grid grid-cols-2 gap-4 m-8">
-                        {pokemon.stats.map((statObject) => {
+                        {pokemon.stats.map((statObject: PokemonStat) => {
                             const statName = formatEntry(statObject.stat.name);
                             const statValue = statObject.base_stat;
 
@@ -67,9 +72,9 @@ export default function Page({ params }: { params: { name: string } }) {
                         Belongs to
                     </LabelPrimitives.Root>
                     <div className="mt-4 flex flex-wrap gap-4 items-center space-2">
-                        {pokemon.types.map((type: { type: { name: string } }) => (
+                        {pokemon.types.map((type: PokemonType) => (
                             <div
-                                key={type.type.name}
+                                key={type["slot"]}
                                 className="px-4 py-2 rounded-full dark:bg-orange-800 flex items-center justify-center"
                             >
                                 <LabelPrimitives.Root className="text-black dark:text-white">
@@ -80,9 +85,9 @@ export default function Page({ params }: { params: { name: string } }) {
                     </div>
                     <h2 className="text-xl font-semibold text-black dark:text-white pt-8">Abilities</h2>
                     <div className="mt-4 flex flex-wrap gap-4 items-center space-2">
-                        {pokemon.abilities.map((ability: { ability: { name: string } }) => (
+                        {pokemon.abilities.map((ability: PokemonAbility) => (
                             <div
-                                key={ability.ability.name}
+                                key={ability.ability["id"]}
                                 className="px-4 py-2 rounded-full dark:bg-blue-800 flex items-center justify-center"
                             >
                                 <LabelPrimitives.Root className="text-black dark:text-white">
