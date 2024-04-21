@@ -24,11 +24,11 @@ export default function Home() {
             return {
                 id: pokemonDetails.id,
                 name: pokemonDetails.name,
-                image: pokemonDetails.sprites && pokemonDetails.sprites.front_default,
+                image: pokemonDetails.sprites?.other.dream_world.front_default,
                 types: pokemonDetails.types,
                 stats: pokemonDetails.stats,
                 abilities: pokemonDetails.abilities,
-                sprites: pokemonDetails.sprites
+                sprites: pokemonDetails.sprites?.other.dream_world.front_default
             };
         });
 
