@@ -3,17 +3,11 @@
 @tailwind utilities;
 
 :root {
-    --background-color: rbg(243, 244, 246);
+    --background-color: rbg(245, 245, 245);
 }
 
 body {
     background: var(--background-color);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background-color: rgb(0, 0, 0);
-    }
 }
 
 @layer utilities {
