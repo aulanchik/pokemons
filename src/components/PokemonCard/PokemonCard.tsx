@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { capitalize, removeHyphens } from "@/utils";
+import { useColorData } from "@/hooks";
 import { PokemonType } from "@/types";
-import useColorData from "@/hooks";
 
 interface PokemonCardProps {
     name: string;
