@@ -46,7 +46,7 @@ export default function Page({ params }: { params: { name: string } }) {
                             width={300}
                         />
                     </div>
-                    <h1 className="text-black dark:text-white font-bold text-2xl">{capitalize(pokemon.name)}</h1>
+                    <h1 className="text-black font-bold text-2xl">{capitalize(pokemon.name)}</h1>
                     <div className="mt-4 grid grid-cols-2 gap-4 m-8">
                         {pokemon.stats.map((statObject: PokemonStat) => {
                             const statName = formatEntry(statObject.stat.name);
