@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { capitalize, removeHyphens } from "@/utils";
@@ -14,12 +14,12 @@ interface PokemonCardProps {
 const PokemonCard: React.FC<PokemonCardProps> = ({ name, image, types }: PokemonCardProps): JSX.Element => {
     const [backgroundColor, setBackgroundColor] = useState("");
     const [palette, setPalette] = useState<string[]>([]);
-    const { paletteColors, predominantColor } = useColorData(image);
+    const { paletteColors, predominantColor, loading } = useColorData(image);
 
-    useLayoutEffect(() => {
-        if (predominantColor) setBackgroundColor(predominantColor);
-        if (paletteColors) setPalette(paletteColors);
-    }, [predominantColor, palette]);
+    useEffect(() => {
+        if (!loading && predominantColor) setBackgroundColor(predominantColor);
+        if (!loading && paletteColors) setPalette(paletteColors);
+    }, [loading, backgroundColor, palette]);
 
     return (
         <Link
