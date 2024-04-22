@@ -14,10 +14,10 @@ interface PokemonCardProps {
 const PokemonCard: React.FC<PokemonCardProps> = ({ name, image, types }: PokemonCardProps): JSX.Element => {
     const [backgroundColor, setBackgroundColor] = useState("");
     const [palette, setPalette] = useState<string[]>([]);
-    const { paletteColors, predominantColor, loading } = useColorData(image);
+    const { paletteColors, dominantColor, loading } = useColorData(image);
 
     useEffect(() => {
-        if (!loading && predominantColor) setBackgroundColor(predominantColor);
+        if (!loading && dominantColor) setBackgroundColor(dominantColor);
         if (!loading && paletteColors) setPalette(paletteColors);
     }, [loading, backgroundColor, palette]);
 
