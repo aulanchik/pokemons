@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import { getColor, getPalette } from "color-thief-react";
 
 interface ColorData {
@@ -14,18 +14,27 @@ const useColorData = (imageUrl: string, colorCount: number = 5) => {
         loading: true
     });
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         let isMounted = true;
         const getData = async () => {
-            const [predominantColor, paletteColors] = await Promise.all([
-                getColor(imageUrl, "hex", "anonymous"),
-                getPalette(imageUrl, colorCount, "hex", "anonymous")
-            ]);
-            if (isMounted) {
-                setColorData({ predominantColor, paletteColors, loading: false });
+            try {
+                const [predominantColor, paletteColors] = await Promise.all([
+                    getColor(imageUrl, "hex", "anonymous"),
+                    getPalette(imageUrl, colorCount, "hex", "anonymous")
+                ]);
+                if (isMounted) {
+                    setColorData({ predominantColor, paletteColors, loading: false });
+                }
+            } catch (error) {
+                console.error("Error fetching color data:", error);
+                if (isMounted) {
+                    setColorData({ predominantColor: null, paletteColors: null, loading: false });
+                }
             }
         };
-        getData();
+        if (imageUrl) {
+            getData();
+        }
         return () => {
             isMounted = false;
         };
