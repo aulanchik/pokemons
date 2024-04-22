@@ -10,7 +10,7 @@ export default function Home() {
 
     useEffect(() => {
         const fetchPokemonsWithImages = async () => {
-            const pokemons = await getPokemons();
+            const pokemons = await getPokemons(300);
             const pokemonsWithImages = await enhancePokemonsWithImages(pokemons);
             setPokemonsWithImages(pokemonsWithImages);
         };
