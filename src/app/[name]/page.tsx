@@ -7,7 +7,7 @@ import * as LabelPrimitives from "@radix-ui/react-label";
 import { capitalize, formatEntry, removeHyphens } from "@/utils";
 import { Pokemon, PokemonStat, PokemonType, PokemonAbility } from "@/types";
 import { getPokemonByName } from "@/api";
-import useColorData from "@/hooks";
+import { useColorData } from "@/hooks";
 
 export default function Page({ params }: { params: { name: string } }) {
     const [pokemon, setPokemon] = useState<Pokemon>();

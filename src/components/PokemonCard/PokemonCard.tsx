@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { capitalize, removeHyphens } from "@/utils";
+import { useColorData } from "@/hooks";
 import { PokemonType } from "@/types";
-import useColorData from "@/hooks";
 
 interface PokemonCardProps {
     name: string;
@@ -24,7 +24,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, image, types }: Pokemon
     return (
         <Link
             href={name}
-            className={`group rounded-lg flex flex-row border-gray-300 shadow-xl transition 0.125s ease-in m-4 p-4`}
+            className={`group rounded-lg flex flex-row border-gray-300 shadow-xl transition 0.5s ease-in m-4 p-4`}
             style={{
                 background: `${backgroundColor}`,
                 opacity: backgroundColor ? 1 : 0,
