@@ -47,7 +47,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, image, types }: Pokemon
                     ))}
                 </div>
             </div>
-            <div className="w-auto h-auto">
+            <div className="flex items-center stretch w-auto h-auto">
                 <Image src={image} width={150} height={150} className="contain-strict" alt={name} />
             </div>
         </Link>

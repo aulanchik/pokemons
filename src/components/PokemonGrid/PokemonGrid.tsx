@@ -29,7 +29,7 @@ const PokemonGrid: React.FC<PokemonGridProps> = ({ pokemons }): JSX.Element => {
             </div>
 
             <div className="lg:col-span-4 flex flex-col items-center">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     {filteredPokemons.map((pokemon: Pokemon) => (
                         <PokemonCard key={pokemon.id} name={pokemon.name} image={pokemon.image} types={pokemon.types} />
                     ))}
