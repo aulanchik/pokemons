@@ -19,7 +19,7 @@ const useColorData = (imageUrl: string, colorCount: number = 5) => {
         const getData = async () => {
             try {
                 const [dominantColor, paletteColors] = await Promise.all([
-                    getColor(imageUrl, "hex", "anonymous"),
+                    getColor(imageUrl, "rgbString", "anonymous"),
                     getPalette(imageUrl, colorCount, "hex", "anonymous")
                 ]);
                 if (isMounted) {
