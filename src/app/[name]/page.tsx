@@ -1,29 +1,21 @@
 "use client";
 
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Header } from "@/components";
 import * as LabelPrimitives from "@radix-ui/react-label";
 import { capitalize, formatEntry, removeHyphens } from "@/utils";
 import { Pokemon, PokemonStat, PokemonType, PokemonAbility } from "@/types";
+import { useGetDominantColor } from "@/hooks";
 import { getPokemonByName } from "@/api";
-import { useColorData } from "@/hooks";
 
 export default function Page({ params }: { params: { name: string } }) {
     const [pokemon, setPokemon] = useState<Pokemon>();
-    const [palette, setPalette] = useState<string[]>([]);
     const [background, setBackground] = useState<string>("");
     const image = pokemon?.sprites.other.dream_world.front_default || "";
+
+    const { color, loading } = useGetDominantColor(image);
     const { name } = params;
-
-    const { dominantColor, paletteColors, loading } = useColorData(image);
-
-    useEffect(() => {
-        if (!loading && dominantColor && paletteColors) {
-            setBackground(dominantColor);
-            setPalette(paletteColors);
-        }
-    }, [loading, dominantColor, paletteColors]);
 
     useEffect(() => {
         async function fetchPokemon() {
@@ -42,7 +34,13 @@ export default function Page({ params }: { params: { name: string } }) {
         };
     }, [name]);
 
-    if (!pokemon) {
+    useEffect(() => {
+        if (!loading && color) {
+            setBackground(color);
+        }
+    }, [loading, color]);
+
+    if (loading || !pokemon) {
         return <div>Loading...</div>;
     }
 
@@ -55,12 +53,7 @@ export default function Page({ params }: { params: { name: string } }) {
                     className="flex flex-col items-center border rounded-lg m-6 p-4"
                 >
                     <div className="flex flex-cols m-4 content-strict">
-                        <Image
-                            src={pokemon.sprites?.other.dream_world.front_default}
-                            alt={pokemon.name}
-                            height={250}
-                            width={250}
-                        />
+                        <Image src={image} alt={pokemon.name} height={250} width={250} />
                     </div>
                     <p className="text-white font-bold text-xl text-center">Details</p>
                     <p className="text-white font-bold text-3xl">{capitalize(pokemon.name)}</p>

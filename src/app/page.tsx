@@ -9,7 +9,7 @@ export default function Home() {
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
-    const ITEMS_PER_PAGE = 30;
+    const ITEMS_PER_PAGE = 25;
 
     const observer = useRef<IntersectionObserver | null>(null);
     const observeRef = useRef<HTMLDivElement>(null);
