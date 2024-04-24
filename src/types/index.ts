@@ -38,4 +38,16 @@ interface PokemonSprites {
     };
 }
 
-export type { Pokemon, PokemonType, PokemonStat, PokemonAbility, PokemonSprites };
+interface ColorData {
+    loading: boolean;
+}
+
+interface DominantColorData extends ColorData {
+    color: string | null;
+}
+
+interface PaletteColorData extends ColorData {
+    palette: Array<string> | null;
+}
+
+export type { Pokemon, PokemonType, PokemonStat, PokemonAbility, PokemonSprites, DominantColorData, PaletteColorData };

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { getPokemons, getPokemonByName } from "@/api";
 import { PokemonGrid } from "@/components";
 import { Pokemon } from "@/types";
@@ -7,9 +7,9 @@ import { Pokemon } from "@/types";
 export default function Home() {
     const [pokemonsWithImages, setPokemonsWithImages] = useState<Pokemon[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [hasMore, setHasMore] = useState(true);
-    const ITEMS_PER_PAGE = 30;
+    const ITEMS_PER_PAGE = 25;
 
     const observer = useRef<IntersectionObserver | null>(null);
     const observeRef = useRef<HTMLDivElement>(null);
@@ -78,8 +78,9 @@ export default function Home() {
 
     return (
         <main className="flex flex-col items-center">
-            <PokemonGrid pokemons={pokemonsWithImages} />
-            {loading && <div className="text-gray-500">Loading...</div>}
+            <Suspense fallback={<div>Loading...</div>}>
+                <PokemonGrid pokemons={pokemonsWithImages} />
+            </Suspense>
             {hasMore && <div ref={observeRef} style={{ height: "10px" }}></div>}
         </main>
     );
