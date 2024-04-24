@@ -26,7 +26,7 @@ const PokemonGrid: React.FC<PokemonGridProps> = ({ pokemons }): JSX.Element => {
         <div className="w-full py-6 md:px-6">
             <div className="container mx-auto md:my-4 flex flex-col md:flex-row place-items-center justify-around md:items-center space-y-2">
                 <h1 className="text-3xl font-bold text-black md:text-4xl lg:text-5xl">PokeDeX Wiki</h1>
-                <div className="w-full max-w-md md:ml-4">
+                <div className="relative w-full max-w-md md:ml-4">
                     <SearchInput placeholder="Search for pokemons..." onChange={handleSearch} value={query} />
                 </div>
             </div>
