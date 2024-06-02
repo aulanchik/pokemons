@@ -1,5 +1,3 @@
-import capitalize from "./capitalize";
-import formatEntry from "./formatEntry";
-import removeHyphens from "./removeHyphens";
-
-export { capitalize, formatEntry, removeHyphens };
+export { default as capitalize } from "./capitalize";
+export { default as formatEntry } from "./formatEntry";
+export { default as removeHyphens } from "./removeHyphens";
