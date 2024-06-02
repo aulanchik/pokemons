@@ -1,4 +1,2 @@
-import useGetColorPalette from "./useGetColorPalette";
-import useGetDominantColor from "./useGetDominantColor";
-
-export { useGetColorPalette, useGetDominantColor };
+export { default as useGetColorPalette } from "./useGetColorPalette";
+export { default as useGetDominantColor } from "./useGetDominantColor";
