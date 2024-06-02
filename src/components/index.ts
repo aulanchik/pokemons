@@ -1,6 +1,4 @@
-import Header from "./Header";
-import PokemonCard from "./PokemonCard";
-import SearchInput from "./SearchInput";
-import PokemonGrid from "./PokemonGrid";
-
-export { Header, PokemonCard, SearchInput, PokemonGrid };
+export { default as Header } from "./Header";
+export { default as PokemonCard } from "./PokemonCard";
+export { default as SearchInput } from "./SearchInput";
+export { default as PokemonGrid } from "./PokemonGrid";
