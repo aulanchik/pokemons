@@ -3,17 +3,17 @@ import capitalize from "../capitalize";
 const formatEntry = (statName: string) => {
     switch (statName) {
         case "hp":
-            return "Health Points";
+            return "HP";
         case "attack":
-            return "Attack";
+            return "ATK";
         case "defense":
-            return "Defense";
+            return "DEF";
         case "special-attack":
-            return "Special Atk.";
+            return "SATK";
         case "special-defense":
-            return "Special Def.";
+            return "RES";
         case "speed":
-            return "Speed";
+            return "SPEED";
         default:
             return capitalize(statName);
     }
