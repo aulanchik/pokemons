@@ -26,14 +26,14 @@ const PokemonCard: React.FC<PokemonCardProps> = memo(({ id, name, image, types }
 
     return (
         <Link
-            id={id}
+            id={`${id}-${name}`}
             href={`/pokemon/${name}`}
             style={{ background: `${background}` }}
-            className="group flex flex-col md:flex-row rounded-lg m-2 p-4 min-w-[300px]"
+            className="group flex flex-col md:flex-row rounded-lg m-2 p-4 min-w-[200px]"
         >
             <div className="flex items-center gap-4">
                 <div className="flex flex-col flex-grow">
-                    <p className="text-white line-clamp-1 text-2xl break-words w-[200px] font-bold leading-loose group-hover:underline">
+                    <p className="text-white line-clamp-1 text-2xl break-words w-[175px] font-bold leading-loose group-hover:underline">
                         {capitalize(name)}
                     </p>
                     <div className="flex gap-2">
@@ -51,7 +51,7 @@ const PokemonCard: React.FC<PokemonCardProps> = memo(({ id, name, image, types }
                     width={85}
                     height={100}
                     layout="intrinsic"
-                    className="contain-strict min-w-[85px] min-h-[100px]"
+                    className="contain-strict min-w-[60px] min-h-[85px]"
                     alt={name}
                 />
             </div>
