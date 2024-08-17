@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, memo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { capitalize, removeHyphens } from "@/utils";
@@ -14,7 +14,7 @@ interface PokemonCardProps {
     types: PokemonType[];
 }
 
-const PokemonCard: React.FC<PokemonCardProps> = ({ id, name, image, types }: PokemonCardProps): JSX.Element | null => {
+const PokemonCard: React.FC<PokemonCardProps> = memo(({ id, name, image, types }) => {
     const [background, setBackground] = useState<string>("");
     const { color, loading } = useGetDominantColor(image);
 
@@ -38,24 +38,33 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ id, name, image, types }: Pok
                     </p>
                     <div className="flex gap-2">
                         {types.map((type: PokemonType) => (
-                            <div
-                                key={type["slot"]}
-                                style={{ border: `1px solid ${background}` }}
-                                className="border rounded-full bg-white bg-opacity-90"
-                            >
-                                <span className="text-md text-black font-semibold leading-loose p-2">
-                                    {removeHyphens(capitalize(type.type["name"]))}
-                                </span>
-                            </div>
+                            <TypeBadge
+                                key={type.slot}
+                                color={background}
+                                typeName={removeHyphens(capitalize(type.type.name))}
+                            />
                         ))}
                     </div>
                 </div>
                 <div className="flex items-center justify-center">
-                    <Image src={image} width={85} height={100} className="contain-strict" alt={name} />
+                    <Image
+                        src={image}
+                        width={85}
+                        height={100}
+                        layout="intrinsic"
+                        className="contain-strict"
+                        alt={name}
+                    />
                 </div>
             </div>
         </Link>
     );
-};
+});
+
+const TypeBadge: React.FC<{ color: string; typeName: string }> = ({ color, typeName }) => (
+    <div style={{ borderColor: color }} className="border rounded-full bg-white bg-opacity-90">
+        <span className="text-md text-black font-semibold leading-loose p-2">{typeName}</span>
+    </div>
+);
 
 export default PokemonCard;
