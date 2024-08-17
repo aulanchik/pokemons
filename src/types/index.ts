@@ -8,6 +8,10 @@ interface Pokemon {
     sprites: PokemonSprites;
 }
 
+interface Pokemons {
+    pokemons: Pokemon[];
+}
+
 interface PokemonStat {
     base_stat: number;
     stat: {
@@ -50,4 +54,13 @@ interface PaletteColorData extends ColorData {
     palette: Array<string> | null;
 }
 
-export type { Pokemon, PokemonType, PokemonStat, PokemonAbility, PokemonSprites, DominantColorData, PaletteColorData };
+export type {
+    Pokemon,
+    Pokemons,
+    PokemonType,
+    PokemonStat,
+    PokemonAbility,
+    PokemonSprites,
+    DominantColorData,
+    PaletteColorData
+};
