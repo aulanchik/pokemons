@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useLayoutEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -25,7 +27,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ id, name, image, types }: Pok
     return (
         <Link
             id={id}
-            href={name}
+            href={`/pokemon/${name}`}
             style={{ background: `${background}` }}
             className="group flex flex-cols rounded-lg m-2 p-4"
         >
