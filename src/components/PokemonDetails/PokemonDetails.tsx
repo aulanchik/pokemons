@@ -6,11 +6,11 @@ import { useGetDominantColor } from "@/hooks";
 import { PokemonIntro, PokemonAbilities, PokemonStats, PokemonTypes } from "@/components";
 import { Pokemon } from "@/types";
 
-interface ClientPokemonDetailsProps {
+interface PokemonDetailsProps {
     pokemon: Pokemon;
 }
 
-const ClientPokemonDetails = ({ pokemon }: ClientPokemonDetailsProps) => {
+const PokemonDetails = ({ pokemon }: PokemonDetailsProps) => {
     const image = pokemon.sprites?.other.dream_world.front_default;
     const { color, loading } = useGetDominantColor(image);
 
@@ -34,4 +34,4 @@ const ClientPokemonDetails = ({ pokemon }: ClientPokemonDetailsProps) => {
     );
 };
 
-export default ClientPokemonDetails;
+export default PokemonDetails;

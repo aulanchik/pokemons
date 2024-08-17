@@ -1,6 +1,6 @@
 import React from "react";
 import { getPokemonByName } from "@/api";
-import { Header, ClientPokemonDetails } from "@/components";
+import { Header, PokemonDetails } from "@/components";
 
 const Page = async ({ params }: { params: { name: string } }) => {
     const pokemon = await getPokemonByName(params.name);
@@ -11,7 +11,7 @@ const Page = async ({ params }: { params: { name: string } }) => {
         <div className="flex flex-col items-center content-start h-screen">
             <div className="flex flex-col items-center spaces-y-8 p-8">
                 <Header />
-                <ClientPokemonDetails pokemon={pokemon} />
+                <PokemonDetails pokemon={pokemon} />
             </div>
         </div>
     );

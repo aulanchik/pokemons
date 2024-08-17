@@ -7,4 +7,4 @@ export { default as PokemonStats } from "./PokemonStats";
 export { default as SearchInput } from "./SearchInput";
 export { default as PokemonGrid } from "./PokemonGrid";
 
-export { default as ClientPokemonDetails } from "./ClientPokemonDetails";
+export { default as PokemonDetails } from "./PokemonDetails";
