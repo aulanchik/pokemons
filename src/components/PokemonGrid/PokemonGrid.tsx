@@ -24,9 +24,11 @@ const PokemonGrid: React.FC<PokemonGridProps> = ({ pokemons }): JSX.Element => {
     );
 
     return (
-        <div className="h-full md:px-6 py-6">
-            <SearchBar query={query} onQuery={handleSearch} />
-            <PokemonList pokemons={filteredPokemons} />
+        <div className="h-full">
+            <div className="h-full p-4 m-4">
+                <SearchBar query={query} onQuery={handleSearch} />
+                <PokemonList pokemons={filteredPokemons} />
+            </div>
         </div>
     );
 };
