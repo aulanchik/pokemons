@@ -1,4 +1,4 @@
-import capitalize from "../capitalize";
+import { capitalize } from "@/utils";
 
 const formatEntry = (statName: string) => {
     switch (statName) {
