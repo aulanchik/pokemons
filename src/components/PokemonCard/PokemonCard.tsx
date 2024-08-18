@@ -33,7 +33,7 @@ const PokemonCard: React.FC<PokemonCardProps> = memo(({ id, name, image, types }
         >
             <div className="flex items-center gap-4">
                 <div className="flex flex-col flex-grow">
-                    <p className="text-white line-clamp-1 text-2xl break-words w-[175px] font-bold leading-loose group-hover:underline">
+                    <p className="text-white line-clamp-1 text-2xl break-words w-[150px] font-bold leading-loose group-hover:underline">
                         {capitalize(name)}
                     </p>
                     <div className="flex gap-2">
