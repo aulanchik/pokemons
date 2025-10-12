@@ -20,7 +20,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ id, name, image, types }: Pok
 
     useLayoutEffect(() => {
         if (!loading && color) setBackground(color);
-    }, [loading, background]);
+    }, [loading, background, color]);
 
     if (loading || !background) return null;
 
