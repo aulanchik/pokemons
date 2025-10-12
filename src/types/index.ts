@@ -1,4 +1,4 @@
-interface Pokemon {
+export interface Pokemon {
     id: string;
     name: string;
     image: string;
@@ -8,28 +8,28 @@ interface Pokemon {
     sprites: PokemonSprites;
 }
 
-interface PokemonStat {
+export interface PokemonStat {
     base_stat: number;
     stat: {
         name: string;
     };
 }
 
-interface PokemonType {
+export interface PokemonType {
     slot: number;
     type: {
         name: string;
     };
 }
 
-interface PokemonAbility {
+export interface PokemonAbility {
     ability: {
         id: number;
         name: string;
     };
 }
 
-interface PokemonSprites {
+export interface PokemonSprites {
     front_default: string;
     other: {
         dream_world: {
@@ -38,16 +38,15 @@ interface PokemonSprites {
     };
 }
 
-interface ColorData {
+export interface ColorData {
     loading: boolean;
 }
 
-interface DominantColorData extends ColorData {
+export interface DominantColorData extends ColorData {
     color: string | null;
 }
 
-interface PaletteColorData extends ColorData {
+export interface PaletteColorData extends ColorData {
     palette: Array<string> | null;
 }
 
-export type { Pokemon, PokemonType, PokemonStat, PokemonAbility, PokemonSprites, DominantColorData, PaletteColorData };
