@@ -1,27 +1,15 @@
-const apiUrl = process.env.NEXT_PUBLIC_POKEMON_API_URL;
+import { client } from './client';
 
-const fetchResource = async (resourceUrl: string) => {
-    const response = await fetch(`${apiUrl}/${resourceUrl}`);
-    const payload = await response.json();
+export const getPokemons = async (limit: number = 1000, offset: number = 0) => {
+    const response = await client.get('pokemon', {
+        params: { limit, offset }
+    })
 
-    if (!response.ok) {
-        throw new Error(payload.message || "Failed to fetch resource");
-    }
-
-    return payload;
-};
-
-const getPokemons = async (limit: number = 1000, offset: number = 0) => {
-    const response = await fetchResource(`pokemon?limit=${limit}&offset=${offset}`);
-
-    const pokemons = response.results;
-    const total = response.count;
+    const { results: pokemons, count: total } = response.data;
     return { pokemons, total };
-};
+}
 
-const getPokemonByName = async (name: string) => {
-    const response = await fetchResource(`pokemon/${name}`);
-    return response;
-};
-
-export { getPokemons, getPokemonByName };
+export const getPokemonByName = async (name: string) => {
+    const response = await client.get(`pokemon/${name}`);
+    return response.data;
+}
